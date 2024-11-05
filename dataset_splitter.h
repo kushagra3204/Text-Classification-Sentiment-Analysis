@@ -6,6 +6,7 @@
 #include <vector>
 #include <string>
 #include <type_traits>
+#include <unordered_map>
 
 using namespace std;
 
@@ -26,8 +27,8 @@ inline string convert(const string& str) {
 }
 
 template <typename T>
-vector<vector<T>> dataset_splitter(T dataset_path) {
-    vector<vector<T>> main_data;
+unordered_map<T,vector<T>> dataset_splitter(T dataset_path) {
+    unordered_map<T,vector<T>> main_data;
     ifstream input;
     input.open(dataset_path,ios::in);
 
@@ -36,7 +37,10 @@ vector<vector<T>> dataset_splitter(T dataset_path) {
     }
 
     string line;
-    int i=0;
+
+    // ignore header or first line
+    getline(input, line);
+    
     while (getline(input, line)) {
         stringstream s(line);
         string field;
@@ -45,8 +49,13 @@ vector<vector<T>> dataset_splitter(T dataset_path) {
         while (getline(s, field, ',')) {
             row_data.push_back(convert<T>(field));
         }
-        main_data.push_back(row_data);
-        i++;
+
+        string sentence = "";
+        for(int i=0;i<row_data.size()-1;i++) {
+            sentence += row_data[i];
+        }
+        main_data[row_data[row_data.size()-1]].push_back(sentence);
+        // i++;
     }
     input.close();
     return main_data;

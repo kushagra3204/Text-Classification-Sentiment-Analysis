@@ -2,6 +2,8 @@
     "files.associations": {
         "*.embeddedhtml": "html",
         ".fantomasignore": "ignore",
-        "iosfwd": "cpp"
+        "string": "cpp",
+        "span": "cpp",
+        "ostream": "cpp"
     }
 }

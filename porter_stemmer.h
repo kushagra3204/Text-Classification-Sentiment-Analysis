@@ -1,13 +1,12 @@
 #ifndef PORTER_STEMMER_H
 #define PORTER_STEMMER_H
 
-#include <string>
-#include <cstring>
-#include <cctype>
+#include "import_libraries.h"
+using namespace std;
 
 class PorterStemmer {
 private:
-    std::string b;
+    string b;
     int k, k0, j;
 
     bool cons(int i) {
@@ -63,7 +62,7 @@ private:
         int length = s[0];
         if (s[length] != b[k]) return false;
         if (length > k - k0 + 1) return false;
-        if (std::memcmp(b.c_str() + k - length + 1, s + 1, length) != 0) return false;
+        if (memcmp(b.c_str() + k - length + 1, s + 1, length) != 0) return false;
         j = k - length;
         return true;
     }
@@ -178,7 +177,7 @@ private:
 public:
     PorterStemmer() : b(""), k(0), k0(0), j(0) {}
 
-    std::string stem(std::string word) {
+    string stem(string word) {
         b = word;
         k = b.size() - 1;
         k0 = 0;

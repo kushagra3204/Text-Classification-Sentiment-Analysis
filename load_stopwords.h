@@ -1,8 +1,7 @@
 #ifndef LOAD_STOPWORDS_H
 #define LOAD_STOPWORDS_H
 
-#include <fstream>
-#include <unordered_map>
+#include "import_libraries.h"
 using namespace std;
 
 unordered_map<string,int> load_stopwords() {

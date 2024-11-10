@@ -1,10 +1,7 @@
 #ifndef PRIOR_PROBABILITY_H
 #define PRIOR_PROBABILITY_H
 
-#include <fstream>
-#include <unordered_map>
-#include <vector>
-
+#include "import_libraries.h"
 using namespace std;
 
 unordered_map<string,double> calculate_prior_probability(unordered_map<string,vector<string>> data) {

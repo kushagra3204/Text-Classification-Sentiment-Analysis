@@ -1,17 +1,13 @@
 #ifndef CALCULATE_LIKELIHOOD_H
 #define CALCULATE_LIKELIHOOD_H
 
-#include <string>
-#include <vector>
-#include <unordered_map>
-
+#include "import_libraries.h"
 using namespace std;
 
 unordered_map<string,unordered_map<string,double>> likelihood_data;
-Result temp_result;
+BOWResuls temp_result;
 
-unordered_map<string,unordered_map<string,double>> calculate_likelihood(Result result) {
-    // unordered_map<string,unordered_map<string,double>> likelihood_data;
+unordered_map<string,unordered_map<string,double>> calculate_likelihood(BOWResuls result) {
     temp_result = result;
     for(auto sd: result.class_words) {
         unordered_map<string,double> likelihood_class_data;

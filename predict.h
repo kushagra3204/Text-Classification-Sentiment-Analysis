@@ -1,32 +1,19 @@
 #ifndef PREDICT_H
 #define PREDICT_H
 
-#include <vector>
-#include <string>
-#include <unordered_map>
-#include "calculate_likelihood.h"
-#include <iostream>
-
+#include "import_libraries.h"
 using namespace std;
 
-unordered_map<string,double> predict(vector<string> test_words, unordered_map<string,unordered_map<string,double>> likelihood_data, unordered_map<string,double> data_pp) {
-    unordered_map<string,double> probs;
-    double probs_sum = 0;
-    for(auto sc: likelihood_data) {
-        probs[sc.first] = data_pp[sc.first];
-        for(int i=0;i<test_words.size();i++) {
-            probs[sc.first] = probs[sc.first]*get_likelihood_data(sc.first,test_words[i]);
-        }
-        // cout<<sc.first<<": "<<probs[sc.first]<<endl;
-        probs_sum += probs[sc.first];
-    }
-    
+pair<string,double> predict(unordered_map<string,double> probs) {
+    double max_num = INT_MIN;
+    string p_class;
     for(auto pb: probs) {
-        probs[pb.first] = (pb.second/probs_sum);
-        // cout<<pb.first<<": "<<pb.second<<endl;
+        if(max_num<pb.second) {
+            max_num = pb.second;
+            p_class = pb.first;
+        }
     }
-
-    return probs;
+    return {p_class,max_num};
 }
 
 #endif

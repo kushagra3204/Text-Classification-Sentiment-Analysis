@@ -1,21 +1,8 @@
 #ifndef BAG_OF_WORDS_H
 #define BAG_OF_WORDS_H
 
-#include <vector>
-#include <unordered_map>
-#include <string>
-#include <sstream>
-#include "porter_stemmer.h"
-
+#include "import_libraries.h"
 using namespace std;
-
-struct Result {
-    // Words in each class and count of it
-    unordered_map<string,unordered_map<string,int>> class_words;
-    
-    // Total Words in bag (Overall Classes)
-    unordered_map<string,int> bag_of_words;
-};
 
 // Splits into lowercase & punctuation-free words
 vector<string> tokenize_and_clean(const string& sentence) {
@@ -28,6 +15,10 @@ vector<string> tokenize_and_clean(const string& sentence) {
         for (auto ch : word) {
             if (!ispunct(ch)) {
                 clean_word += tolower(ch);
+            } else {
+                string temp = "";
+                temp += ch;
+                words.push_back(temp);
             }
         }
         words.push_back(clean_word);
@@ -49,7 +40,7 @@ vector<string> filter_and_stem(const vector<string>& words, const unordered_map<
 }
 
 // Updates the class_words and bag_of_words in the Result struct
-void update_bag_of_words(Result& result, const string& class_label, const vector<string>& words) {
+void update_bag_of_words(BOWResuls& result, const string& class_label, const vector<string>& words) {
     for (const auto& word : words) {
         result.class_words[class_label][word]++;
         result.bag_of_words[word]++;
@@ -57,8 +48,8 @@ void update_bag_of_words(Result& result, const string& class_label, const vector
 }
 
 // Loads Bag of word and calculate frequency of words in each class
-Result load_bow_and_class_words(const unordered_map<string, vector<string>>& data, const unordered_map<string, int>& stopwords) {
-    Result result;
+BOWResuls load_bow_and_class_words(const unordered_map<string, vector<string>>& data, const unordered_map<string, int>& stopwords) {
+    BOWResuls result;
 
     for (const auto& [class_label, sentences] : data) {
         unordered_map<string, int> class_word;

@@ -10,6 +10,9 @@
 #include <type_traits>
 #include <cstring>
 #include <cctype>
+#include <iomanip>
+#include <future>
+#include <regex>
 
 // Custom Libraries
 #include "custom_structs.h"
@@ -24,3 +27,4 @@
 #include "prior_probability.h"
 #include "pipeline.h"
 #include "test.h"
+#include "performance_metrics.h"

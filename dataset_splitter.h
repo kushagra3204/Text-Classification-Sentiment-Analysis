@@ -44,11 +44,12 @@ unordered_map<T,vector<T>> dataset_splitter(T dataset_path) {
             row_data.push_back(convert<T>(field));
         }
 
-        string sentence = "";
-        for(int i=0;i<row_data.size()-1;i++) {
-            sentence += row_data[i];
+        std::ostringstream sentence;
+        for (size_t i = 0; i < row_data.size() - 1; ++i) {
+            sentence << row_data[i];
         }
-        main_data[row_data[row_data.size()-1]].push_back(sentence);
+
+        main_data[row_data.back()].push_back(sentence.str());
         // i++;
     }
     input.close();

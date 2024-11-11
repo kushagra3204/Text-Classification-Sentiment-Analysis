@@ -1,8 +1,0 @@
-{
-    "files.associations": {
-        "*.embeddedhtml": "html",
-        ".fantomasignore": "ignore",
-        "unordered_map": "cpp",
-        "sstream": "cpp"
-    }
-}

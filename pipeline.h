@@ -16,7 +16,7 @@ TrainResults pipeline(string dataset_path) {
     cout<<endl;
 
     // Load Class Names
-    vector<string> class_ = load_classes(data);
+    train_res.class_ = load_classes(data);
     
     // Loading all stopwords from dataset
     unordered_map<string,int> stopwords = load_stopwords();
